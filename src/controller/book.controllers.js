@@ -22,7 +22,30 @@ async function findAllBooksController(req, res) {
     }
 }
 
+async function findBookByIdController(req, res) {
+    const {id} = req.params
+    try {
+        const book = await bookServices.findBookByIdService(id)
+        res.status(200).send({book})
+    } catch (error) {
+        res.status(404).send(error.message)
+    }
+    
+}
+
+async function deleteBookService(req, res) {
+    const {id} = req.params
+    try {
+        const message = await bookServices.deleteBookService(id)
+        res.send({message})
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+
 export default {
     createBookController,
-    findAllBooksController
+    findAllBooksController,
+    findBookByIdController,
+    deleteBookService
 }

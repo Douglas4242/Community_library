@@ -42,8 +42,44 @@ function findAllBooksRepository() {
     })
 }
 
+function findBookByIdRepository(id) {
+    return new Promise((resolve, reject) => {
+        db.get(`
+            SELECT id, title, author, userId FROM books
+            WHERE id = ?
+            `, [id],
+        (err, row) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(row)
+            }
+        })
+    })
+}
+
+function deleteBookRepository(id) {
+    return new Promise((resolve, reject) => {
+        db.run(`
+            DELETE FROM books
+            WHERE id = ?
+            `, [id],
+        (err) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve({message: `Book deleted successfully: ${id}`})
+            }
+        })
+    })
+}
+
+
+
+
 export default {
     createBookRepository,
-    findAllBooksRepository
-
+    findAllBooksRepository,
+    findBookByIdRepository,
+    deleteBookRepository
 }

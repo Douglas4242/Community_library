@@ -12,6 +12,7 @@ router.use(authMiddleware)
 router.post("/books", validate(bookSchema), bookControllers.createBookController)
 router.get('/books/:id',validateBookId , bookControllers.findBookByIdController)
 router.delete('/books/:id',validateBookId , bookControllers.deleteBookService)
+router.patch('/books/:id', validateBookId, bookControllers.updateBookController)
 
 
 export default router

@@ -74,12 +74,41 @@ function deleteBookRepository(id) {
     })
 }
 
+function updateBookRepository(id, book) {
+    return new Promise ((resolve, reject) => {
+        const {title, author} = book
+        const fields = ['title', 'author'];
+        let query = "UPDATE books SET"
+        const values = []
 
+        fields.forEach((field) => {
+             if(book[field] !== undefined) {
+                query += ` ${field} = ?,`
+                values.push(book[field])
+            }
+        })
+
+        query = query.slice(0, -1)
+
+        query += " WHERE id = ?"
+        values.push(id)
+        console.log(query, values)
+        db.run(query, values, (err) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve({...book, id})
+            }
+        })
+    })
+
+}
 
 
 export default {
     createBookRepository,
     findAllBooksRepository,
     findBookByIdRepository,
-    deleteBookRepository
+    deleteBookRepository,
+    updateBookRepository
 }

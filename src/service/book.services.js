@@ -24,9 +24,17 @@ async function deleteBookService(id) {
     return message 
 }
 
+async function updateBookService(id, book) {
+    const newBook = await bookRepositories.findBookByIdRepository(id)
+    if(!newBook) throw new Error ("Book was not found")
+    const updatedBook = await bookRepositories.updateBookRepository(id, book)  
+    return updatedBook
+}
+
 export default {
     createBookService,
     findAllBooksService,
     findBookByIdService,
-    deleteBookService
+    deleteBookService,
+    updateBookService
 }

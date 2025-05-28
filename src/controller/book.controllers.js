@@ -43,9 +43,22 @@ async function deleteBookService(req, res) {
     }
 }
 
+async function updateBookController(req, res) {
+    const {id} = req.params
+    const newBook = req.body
+    try {
+        const book = await bookServices.updateBookService(id,newBook)
+        res.status(201).send({book})
+    } catch (err) {
+        res.status(400).send(err.message)
+    }
+    
+}
+
 export default {
     createBookController,
     findAllBooksController,
     findBookByIdController,
-    deleteBookService
+    deleteBookService,
+    updateBookController
 }

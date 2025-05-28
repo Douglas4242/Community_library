@@ -105,12 +105,7 @@ function updateUserRepository(id, user) {
         const values = []
 
         fields.forEach((field) => {
-            console.log("field", field)
-            console.log("query", query)
-            console.log("values", values)
-
-
-            if(user[field] !== undefined) {
+             if(user[field] !== undefined) {
                 query += ` ${field} = ?,`
                 values.push(user[field])
             }

@@ -17,16 +17,18 @@ async function findBookByIdService(id) {
     return book    
 }
 
-async function deleteBookService(id) {
+async function deleteBookService(id, userId) {
     const book = await bookRepositories.findBookByIdRepository(id)
     if (!book) throw new Error ("Book not found")
+    if (book.userId !== userId) throw new Error("Unauthorized")
     const {message} = await bookRepositories.deleteBookRepository(id)
     return message 
 }
 
-async function updateBookService(id, book) {
+async function updateBookService(id, book, userId) {
     const newBook = await bookRepositories.findBookByIdRepository(id)
     if(!newBook) throw new Error ("Book was not found")
+    if (newBook.userId !== userId) throw new Error("Unauthorized")
     const updatedBook = await bookRepositories.updateBookRepository(id, book)  
     return updatedBook
 }

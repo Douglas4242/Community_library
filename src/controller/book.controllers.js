@@ -35,8 +35,9 @@ async function findBookByIdController(req, res) {
 
 async function deleteBookService(req, res) {
     const {id} = req.params
+    const userId = req.userId
     try {
-        const message = await bookServices.deleteBookService(id)
+        const message = await bookServices.deleteBookService(id, userId)
         res.send({message})
     } catch (error) {
         res.status(400).send(error.message)
@@ -46,8 +47,9 @@ async function deleteBookService(req, res) {
 async function updateBookController(req, res) {
     const {id} = req.params
     const newBook = req.body
+    const userId = req.userId
     try {
-        const book = await bookServices.updateBookService(id,newBook)
+        const book = await bookServices.updateBookService(id,newBook,userId)
         res.status(201).send({book})
     } catch (err) {
         res.status(400).send(err.message)

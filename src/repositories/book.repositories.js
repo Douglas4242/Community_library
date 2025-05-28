@@ -92,7 +92,6 @@ function updateBookRepository(id, book) {
 
         query += " WHERE id = ?"
         values.push(id)
-        console.log(query, values)
         db.run(query, values, (err) => {
             if (err) {
                 reject(err)

@@ -1,4 +1,3 @@
-import { promise } from "zod/v4";
 import db from "../config/database.js";
 
 db.run(`

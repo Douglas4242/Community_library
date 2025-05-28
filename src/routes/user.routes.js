@@ -9,7 +9,6 @@ const router = Router()
 router.post('/users', validate(userSchema), userController.createUserController)
 router.post('/users/login', userController.loginUserController)
 
-router.use(authMiddleware)
 router.get('/users', userController.findAllUsersController)
 router.get('/users/:id', validateUserId, userController.findUserByIdController)
 

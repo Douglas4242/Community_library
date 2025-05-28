@@ -19,7 +19,6 @@ async function createUserService(newUser){
     if(!user) {
         throw new Error("Error creating User")
     }
-    console.log(user)
     const token = generateJWT(user.id)
     return token
 }

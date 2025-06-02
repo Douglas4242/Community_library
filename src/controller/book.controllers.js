@@ -57,10 +57,22 @@ async function updateBookController(req, res) {
     
 }
 
+async function searchBookController(req, res) {
+    const {search} = req.query
+    try {
+        const books = await bookServices.searchBookService(search)
+        res.status(200).send(books)
+    } catch (err) {
+        res.status(404).send(err.message)
+    }
+    
+}
+
 export default {
     createBookController,
     findAllBooksController,
     findBookByIdController,
     deleteBookService,
-    updateBookController
+    updateBookController,
+    searchBookController
 }

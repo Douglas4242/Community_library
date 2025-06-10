@@ -42,7 +42,43 @@ function findAllLoansRepository () {
     })
 }
 
+function findLoanByIdRepository (id) {
+    return new Promise ((resolve, reject) => {
+        db.get(`
+            SELECT id, bookId, userId, dueDate FROM loans
+            WHERE id = ?
+            `, [id], 
+            (err, row) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(row)
+                }
+            })
+    })
+}
+
+function deleteLoanRepository (id) {
+    return new Promise ((resolve, reject) => {
+        db.run (`
+            DELETE FROM loans
+            WHERE id = ?
+            `,
+            [id],
+            (err) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve({message: `loan id: ${id} was deleted successfully`})
+                }
+            }
+        )
+    })
+}
+
 export default {
     createLoanRepository,
-    findAllLoansRepository
+    findAllLoansRepository,
+    findLoanByIdRepository,
+    deleteLoanRepository
 }

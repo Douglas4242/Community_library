@@ -33,7 +33,7 @@ const validateUserId = (req, res, next) => {
 
  const validateLoanId = (req, res, next) => {
     try {
-        const loanId = req.params.id
+        const loanId = +req.params.id
         loanIdSchema.parse({loanId: loanId})
         next()
     } catch (e) {

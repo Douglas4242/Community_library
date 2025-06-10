@@ -11,7 +11,25 @@ async function findAllLoansService() {
     return loans
 }
 
+async function findLoanByIdService(id) {
+    const loan = await loanRepositories.findLoanByIdRepository(id)
+    if (!loan) throw new Error ("Loan not found")
+    return loan
+    
+}
+
+async function deleteLoanService(id, userId) {
+    const loan = await loanRepositories.findLoanByIdRepository(id)
+    if (!loan) throw new Error ("Loan not found")
+    if (loan.userId !== userId) throw new Error ("Unauthorized")
+    const message = await loanRepositories.deleteLoanRepository(id)
+    return (message)
+    
+}
+
 export default {
     createLoanService,
-    findAllLoansService
+    findAllLoansService,
+    findLoanByIdService,
+    deleteLoanService
 }

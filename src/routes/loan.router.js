@@ -7,10 +7,10 @@ import { loanSchema } from "../schema/loan.schema.js";
 const router = Router()
 
 router.use(authMiddleware)
-router.get('/loans', loanControllers.findAllLoansController)
+router.get('/', loanControllers.findAllLoansController)
 
-router.post('/loans', validate(loanSchema), loanControllers.createLoanController)
-router.get('/loans/:id', validateLoanId, loanControllers.findLoanByIdController)
-router.delete('/loans/:id', validateLoanId, loanControllers.deleteLoanController)
+router.post('/', validate(loanSchema), loanControllers.createLoanController)
+router.get('/:id', validateLoanId, loanControllers.findLoanByIdController)
+router.delete('/:id', validateLoanId, loanControllers.deleteLoanController)
 
 export default router

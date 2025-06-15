@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-function sendEmail (email, bookTittle, dueDate) {
+function sendEmail (name, email, bookTittle, dueDate) {
     const mailOptions = {
         from: '',
         to: email,
@@ -17,7 +17,7 @@ function sendEmail (email, bookTittle, dueDate) {
         html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
             <h2 style="color: $f60;">Community Library Reminder</h2>
-            <p>Dear User,</p>
+            <p>Dear ${name},</p>
             <p>This is a reminder that the book <strong>"${bookTittle}"</strong> is due on <strong>${dueDate}</strong>.</p>
             <p>Please make sure to return or renew it on time;</p>
             <p>Best regards,<br>Yor Community Library</p>
